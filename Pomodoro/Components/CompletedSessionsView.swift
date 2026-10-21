@@ -30,7 +30,7 @@ struct CompletedSessionsView: View {
                     .foregroundStyle(.secondary)
             }
             Spacer()
-            Text("\(completedSessions)")
+            Text(.init(stringLiteral: "\(completedSessions)"))
                 .font(.system(size: countSize, weight: .bold))
             Text(LocalKey.session)
                 .font(.caption)
@@ -39,11 +39,7 @@ struct CompletedSessionsView: View {
         }
         .padding(.vertical, 8)
         .padding(.horizontal, 16)
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .fill(Color(.secondarySystemBackground))
-                .shadow(radius: 6)
-        )
+        .cardBackground()
     }
 }
 

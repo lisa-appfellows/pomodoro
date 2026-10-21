@@ -30,7 +30,7 @@ struct DefaultsStorage {
     var sessionMode: SessionMode {
         get {
             let raw = defaults.string(forKey: sessionModeKey) ?? ""
-            return .init(rawValue: raw) ?? .work
+            return .init(rawValue: raw) ?? .defaultMode
         }
         set {
             defaults.set(newValue.rawValue, forKey: sessionModeKey)

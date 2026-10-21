@@ -10,6 +10,7 @@ import Foundation
 enum SessionMode: String, CaseIterable {
     case  work, `break`
 
+    static let defaultMode = Self.work
     static let minutesRange = 1...99
     var defaultMinutes: Int {
         switch self {

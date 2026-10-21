@@ -7,78 +7,101 @@
 
 import SwiftUI
 
-enum SecondaryControl {
-    case pause, reset
-    var title: LocalizedStringResource {
-        switch self {
-        case .pause: return LocalKey.pause
-        case .reset: return LocalKey.reset
-        }
-    }
-    var icon: String {
-        switch self {
-        case .pause: return SystemKey.pauseFill
-        case .reset: return SystemKey.arrowCounter
-        }
-    }
-}
-
 struct PlayControls: View {
-    let didPause: () -> Void
-    let didStart: () -> Void
-    let didReset: () -> Void
-
+    @Binding var isPlaying: Bool
+    let onCancel: () -> Void
+    let onReset: () -> Void
+    
     var body: some View {
         HStack(spacing: 16) {
-            secondaryControl(.pause)
-            startControl()
-            secondaryControl(.reset)
-        }
-    }
-
-    private func startControl() -> some View {
-        Button {
-            didStart()
-        } label: {
-            HStack(spacing: 16) {
-                Image(systemName: SystemKey.playFill)
-                Text(LocalKey.start)
-            }
-            .foregroundStyle(.white)
-            .font(.system(.title2, weight: .bold))
-            .frame(maxWidth: .infinity)
-            .frame(height: 60)
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(.tint)
-                    .shadow(radius: 3)
+            SecondaryControl(
+                title: LocalKey.cancel,
+                action: onCancel
             )
-        }
-    }
-
-    private func secondaryControl(_ control: SecondaryControl) -> some View {
-        Button {
-            control == .pause ? didPause() : didReset()
-        } label: {
-            VStack(spacing: 8) {
-                Image(systemName: control.icon)
-                    .font(.title3)
-                Text(control.title)
-                    .font(.subheadline)
-            }
-            .bold()
-            .foregroundStyle(Color(.label))
-            .frame(maxWidth: .infinity)
-            .frame(height: 60)
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color(.secondarySystemBackground))
-                    .shadow(radius: 3)
+            PrimaryControl(isPlaying: $isPlaying)
+            SecondaryControl(
+                title: LocalKey.reset,
+                icon: SystemKey.arrowCounter,
+                action: onReset
             )
         }
     }
 }
 
-#Preview {
-    PlayControls(didPause: {}, didStart: {}, didReset: {})
+private struct PrimaryControl: View {
+    @Binding var isPlaying: Bool
+
+    private var icon: String {
+        isPlaying ? 
+        SystemKey.pauseFill :
+        SystemKey.playFill
+    }
+    private var title: LocalizedStringResource {
+        isPlaying ?
+        LocalKey.pause :
+        LocalKey.start
+    }
+    private var foregroundColor: Color {
+        isPlaying ? Theme.tint : Theme.background
+    }
+    private var fillColor: Color {
+        isPlaying ? .clear : Theme.tint
+    }
+
+    var body: some View {
+        Button {
+            withAnimation(.easeInOut(duration: 0.12)) {
+                isPlaying.toggle()
+            }
+        } label: {
+            HStack {
+                Image(systemName: icon)
+                Text(title)
+            }
+            .bold()
+            .font(.title3)
+            .foregroundStyle(foregroundColor)
+            .frame(height: 60)
+            .frame(maxWidth: .infinity)
+            .background(
+                RoundedRectangle(cornerRadius: Theme.cornerRadius)
+                    .fill(fillColor)
+                    .strokeBorder(Theme.tint)
+            )
+            .id(isPlaying)
+            .transition(.opacity)
+        }
+        .animation(.easeInOut(duration: 0.12), value: isPlaying)
+    }
+}
+
+private struct SecondaryControl: View {
+    let title: LocalizedStringResource
+    let icon: String?
+    let action: () -> Void
+
+    init(
+        title: LocalizedStringResource,
+        icon: String? = nil,
+        action: @escaping () -> Void
+    ) {
+        self.title = title
+        self.icon = icon
+        self.action = action
+    }
+
+    var body: some View {
+        Button(action: action) {
+            VStack(spacing: 8) {
+                if let icon { Image(systemName: icon) }
+                Text(title)
+            }
+            .font(.subheadline)
+            .foregroundStyle(Color(.label))
+            .frame(width: 80, height: 80)
+            .background(
+                Circle().fill(Theme.secondaryBackground)
+            )
+        }
+    }
 }

@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%lld" : {
-
-    },
     "appSubtitle.key" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -12,6 +9,12 @@
             "state" : "translated",
             "value" : "The Secret Sauce For Focus"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El secreto del enfoque"
+          }
         }
       }
     },
@@ -19,6 +22,12 @@
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomodoro"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pomodoro"
@@ -34,6 +43,12 @@
             "state" : "translated",
             "value" : "Break"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descanso"
+          }
         }
       }
     },
@@ -44,6 +59,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Break Interval"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intervalo de descanso"
           }
         }
       }
@@ -56,6 +77,29 @@
             "state" : "translated",
             "value" : "Break Session"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sesión de descanso"
+          }
+        }
+      }
+    },
+    "cancel.key" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
         }
       }
     },
@@ -66,6 +110,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Completed Today"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completados hoy"
           }
         }
       }
@@ -78,6 +128,12 @@
             "state" : "translated",
             "value" : "Interval Settings"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes de intervalo"
+          }
         }
       }
     },
@@ -88,6 +144,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Adjust your Pomodoro intervals"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajusta tus intervalos Pomodoro"
           }
         }
       }
@@ -100,6 +162,12 @@
             "state" : "translated",
             "value" : "Great focus! Keep it up!"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Gran enfoque! ¡Sigue así!"
+          }
         }
       }
     },
@@ -107,6 +175,12 @@
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "min"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "min"
@@ -122,6 +196,12 @@
             "state" : "translated",
             "value" : "Pause"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pausa"
+          }
         }
       }
     },
@@ -133,11 +213,14 @@
             "state" : "translated",
             "value" : "Reset"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reiniciar"
+          }
         }
       }
-    },
-    "Session Mode Picker" : {
-
     },
     "sessions.key" : {
       "extractionState" : "manual",
@@ -147,6 +230,12 @@
             "state" : "translated",
             "value" : "sessions"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "sesiones"
+          }
         }
       }
     },
@@ -154,6 +243,12 @@
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld min"
@@ -169,6 +264,12 @@
             "state" : "translated",
             "value" : "Start"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar"
+          }
         }
       }
     },
@@ -179,6 +280,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Get focused."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Concéntrate."
           }
         }
       }
@@ -191,11 +298,14 @@
             "state" : "translated",
             "value" : "Stop"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detener"
+          }
         }
       }
-    },
-    "Time Interval Stepper" : {
-
     },
     "work.key" : {
       "extractionState" : "manual",
@@ -204,6 +314,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Work"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trabajo"
           }
         }
       }
@@ -216,6 +332,12 @@
             "state" : "translated",
             "value" : "Work Interval"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intervalo de trabajo"
+          }
         }
       }
     },
@@ -226,6 +348,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Work Session"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sesión de trabajo"
           }
         }
       }

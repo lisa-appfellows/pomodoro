@@ -30,9 +30,9 @@ struct ContentView: View {
                 totalDuration: vm.currentInterval
             )
             PlayControls(
-                didPause: { vm.didPause() },
-                didStart: { vm.didStart() },
-                didReset: { vm.didReset() }
+                isPlaying: $vm.isPlaying,
+                onCancel: { vm.didCancel() },
+                onReset: { vm.didReset() }
             )
             SessionModePicker(selection: $vm.currentMode)
             IntervalSettingsView(
@@ -42,7 +42,7 @@ struct ContentView: View {
             CompletedSessionsView(completedSessions: vm.completedSessions)
         }
         .padding()
-        .tint(.orange)
+        .tint(Theme.tint)
     }
 }
 

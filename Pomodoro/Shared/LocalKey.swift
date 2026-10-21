@@ -13,6 +13,7 @@ enum LocalKey {
     static let `break` = makeKey("break.key")
     static let breakInterval = makeKey("breakInterval.key")
     static let breakSession = makeKey("breakSession.key")
+    static let cancel = makeKey("cancel.key")
     static let completedToday = makeKey("completedToday.key")
     static let intervalSettings = makeKey("intervalSettings.key")
     static let intervalSettingsSub = makeKey("intervalSettingsSub.key")

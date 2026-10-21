@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct PomodoroApp: App {
     init() {
-        setupPickerAppearance()
+//        setupPickerAppearance()
     }
 
     var body: some Scene {

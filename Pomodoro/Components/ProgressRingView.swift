@@ -15,46 +15,63 @@ struct ProgressRingView: View {
     @ScaledMetric(relativeTo: .largeTitle)
     private var timeSize: CGFloat = 36
 
+    private var modeIcon: String {
+        Theme.sessionIcon(mode)
+    }
+
     private var modeText: LocalizedStringResource {
         mode == .work ?
         LocalKey.workSession :
         LocalKey.breakSession
     }
 
+    private var modeTint: Color {
+        Theme.sessionTint(mode)
+    }
+
     private var progress: Double {
-        guard totalDuration > 0 else { return 0.0 }
-        let elapsed = totalDuration - timeRemaining
-        return min(max(elapsed / totalDuration, 0.0), 1.0)
+        SessionTime.progress(
+            remaining: timeRemaining,
+            total: totalDuration
+        )
     }
 
     var body: some View {
         ZStack {
-            Circle()
-                .fill(.clear)
-                .stroke(.secondary.opacity(0.2), lineWidth: 12)
-            Circle()
-                .trim(from: 0, to: progress)
-                .fill(.clear)
-                .stroke(.tint, style: StrokeStyle(lineWidth: 12, lineCap: .round))
-                .rotationEffect(.degrees(-90))
-                .animation(.spring(duration: 0.4, bounce: 0.1), value: progress)
-            VStack {
-                Text(formatTimeInterval(timeRemaining))
-                    .font(.largeTitle.bold())
-                Text(modeText)
-                    .font(.system(.subheadline, weight: .thin))
-                    .animation(.easeInOut(duration: 0.4), value: mode)
-            }
+            trackRing
+            fillRing
+            innerContent
         }
         .padding()
     }
 
-    private func formatTimeInterval(_ interval: TimeInterval) -> String {
-        let totalSeconds = Int(interval)
-        let minutes = totalSeconds / 60
-        let seconds = totalSeconds % 60
-        
-        return String(format: "%02d:%02d", minutes, seconds)
+    private var trackRing: some View {
+        Circle()
+            .fill(.clear)
+            .stroke(.secondary.opacity(0.2), lineWidth: 8)
+    }
+
+    private var fillRing: some View {
+        Circle()
+            .trim(from: 0, to: progress)
+            .fill(.clear)
+            .stroke(
+                modeTint,
+                style: StrokeStyle(lineWidth: 8, lineCap: .round)
+            )
+            .rotationEffect(.degrees(-90))
+            .animation(.spring(duration: 0.4, bounce: 0.1), value: progress)
+    }
+
+    private var innerContent: some View {
+        VStack(spacing: 8) {
+            Text(SessionTime.format(for: timeRemaining))
+                .font(.largeTitle)
+            Image(systemName: modeIcon)
+                .foregroundStyle(modeTint)
+            Text(modeText)
+                .font(.system(.subheadline, weight: .thin))
+        }
     }
 }
 
