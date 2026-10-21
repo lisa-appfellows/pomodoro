@@ -12,15 +12,23 @@ import Foundation
 final class ContentViewModel {
     private var defaultsStorage: DefaultsStorage
 
-    var currentMode: SessionMode = .work {
+    var isPlaying = false {
+        didSet {
+            isPlaying ?
+            timer?.start() : 
+            timer?.pause()
+        }
+    }
+
+    var currentMode: SessionMode = .defaultMode {
         didSet { defaultsStorage.sessionMode = currentMode }
     }
 
-    var breakMinutes: Int {
+    var breakMinutes: Int = SessionTime.defaultBreakMinutes {
         didSet { defaultsStorage.breakMinutes = breakMinutes }
     }
 
-    var workMinutes: Int {
+    var workMinutes: Int = SessionTime.defaultWorkMinutes {
         didSet { defaultsStorage.workMinutes = workMinutes }
     }
 
@@ -45,19 +53,11 @@ final class ContentViewModel {
         attachTimer()
     }
 
-    func didStart() {
-        timer?.start()
-    }
-
-    func didPause() {
-        timer?.pause()
-    }
-
-    func didStop() {
+    func didReset() {
         timer?.reset(with: currentInterval)
     }
 
-    func didReset() {
+    func didCancel() {
         timer?.pause()
         currentMode = .work
         timer?.reset(with: currentInterval)
