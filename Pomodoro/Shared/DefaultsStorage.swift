@@ -10,8 +10,13 @@ import Foundation
 struct DefaultsStorage {
     static let shared = Self.init(defaults: .standard)
     private let defaults: UserDefaults
+
     init(defaults: UserDefaults) {
         self.defaults = defaults
+        defaults.register(defaults: [
+            breakMinutesKey: SessionTime.defaultBreakMinutes,
+            workMinutesKey: SessionTime.defaultWorkMinutes
+        ])
     }
 
     private let breakMinutesKey = "breakMinutes"

@@ -9,6 +9,12 @@ import XCTest
 @testable import Pomodoro
 
 final class PomodoroTests: XCTestCase {
+    func testSessionTimeCreatesAppropriateIntervalFromMinutes() {
+        let minutes = 5
+        let interval = SessionTime.asInterval(minutes)
+        XCTAssertEqual(interval, 300)
+    }
+
     func testSessionTimeProgressReturnsCorrectProgress() {
         let progress = SessionTime.progress(
             remaining: 25,

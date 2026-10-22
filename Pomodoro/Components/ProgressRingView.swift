@@ -66,9 +66,10 @@ struct ProgressRingView: View {
     private var innerContent: some View {
         VStack(spacing: 8) {
             Text(SessionTime.format(for: timeRemaining))
-                .font(.largeTitle)
+                .font(.system(.largeTitle, design: .monospaced))
             Image(systemName: modeIcon)
                 .foregroundStyle(modeTint)
+                .frame(width: 25, height: 25)
             Text(modeText)
                 .font(.system(.subheadline, weight: .thin))
         }

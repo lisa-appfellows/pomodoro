@@ -21,13 +21,19 @@ protocol CountdownTiming {
 @MainActor
 @Observable
 final class CountdownTimer: CountdownTiming {
+    private let clock: any TimerClock
+
     private(set) var isRunning = false
-    var timeRemaining: TimeInterval = 0
+    private(set) var timeRemaining: TimeInterval = 0
 
     private var targetDate: Date?
     private var countdownTask: Task<Void, Never>?
-    
+
     var didFinish: (() -> Void)?
+
+    init(clock: (any TimerClock)? = nil) {
+        self.clock = clock ?? AppTimerClock()
+    }
     
     func set(for timeRemaining: TimeInterval) {
         self.timeRemaining = timeRemaining
@@ -36,23 +42,23 @@ final class CountdownTimer: CountdownTiming {
     func start() {
         guard !isRunning else { return }
         isRunning = true
+        targetDate = clock.now.addingTimeInterval(timeRemaining)
 
-        targetDate = Date().addingTimeInterval(timeRemaining)
         countdownTask = Task { [weak self] in
             while self?.isRunning == true {
                 guard let self, let targetDate else { return }
 
-                let delta = targetDate.timeIntervalSince(Date())
+                let delta = targetDate.timeIntervalSince(self.clock.now)
 
                 if delta <= 0 {
-                    self.didFinish?()
+                    self.finish()
                     return
                 }
 
                 self.timeRemaining = ceil(delta)
 
                 do {
-                    try await Task.sleep(for: .seconds(1.0))
+                    try await clock.sleep(for: 1)
                     guard self.isRunning else { return }
                 } catch {
                     return
@@ -66,7 +72,7 @@ final class CountdownTimer: CountdownTiming {
         isRunning = false
         countdownTask?.cancel()
         if let targetDate {
-            let timeSince = targetDate.timeIntervalSince(Date())
+            let timeSince = targetDate.timeIntervalSince(clock.now)
             timeRemaining = max(0, ceil(timeSince))
         }
     }
@@ -75,5 +81,12 @@ final class CountdownTimer: CountdownTiming {
         if isRunning { isRunning = false }
         countdownTask?.cancel()
         self.timeRemaining = timeRemaining
+    }
+
+    private func finish() {
+        if isRunning { isRunning = false }
+        countdownTask?.cancel()
+        timeRemaining = 0
+        didFinish?()
     }
 }
