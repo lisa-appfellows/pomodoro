@@ -29,6 +29,9 @@
 		0487FF6A30885AE000D237F4 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF6930885AE000D237F4 /* Theme.swift */; };
 		0487FF6C3088600600D237F4 /* SessionTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF6B3088600600D237F4 /* SessionTime.swift */; };
 		0487FF7130886AF600D237F4 /* DefaultsStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF7030886AF600D237F4 /* DefaultsStorageTests.swift */; };
+		0487FF733089567700D237F4 /* CountdownTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF723089567700D237F4 /* CountdownTimerTests.swift */; };
+		0487FF763089623F00D237F4 /* TimerClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF753089623F00D237F4 /* TimerClock.swift */; };
+		0487FF7830897E6E00D237F4 /* ContentViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF7730897E6E00D237F4 /* ContentViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +77,9 @@
 		0487FF6930885AE000D237F4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		0487FF6B3088600600D237F4 /* SessionTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTime.swift; sourceTree = "<group>"; };
 		0487FF7030886AF600D237F4 /* DefaultsStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsStorageTests.swift; sourceTree = "<group>"; };
+		0487FF723089567700D237F4 /* CountdownTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimerTests.swift; sourceTree = "<group>"; };
+		0487FF753089623F00D237F4 /* TimerClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerClock.swift; sourceTree = "<group>"; };
+		0487FF7730897E6E00D237F4 /* ContentViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,8 +133,8 @@
 				0487FF173085809500D237F4 /* PomodoroApp.swift */,
 				0487FF193085809500D237F4 /* ContentView.swift */,
 				0487FF4C308589B100D237F4 /* ContentViewModel.swift */,
-				0487FF4E30858A2700D237F4 /* CountdownTimer.swift */,
 				0487FF5330859A8100D237F4 /* Components */,
+				0487FF743089622000D237F4 /* CountdownTimer */,
 				0487FF1D3085809600D237F4 /* Preview Content */,
 				0487FF43308586CE00D237F4 /* Resources */,
 				0487FF6D308865FE00D237F4 /* Shared */,
@@ -147,8 +153,10 @@
 		0487FF273085809600D237F4 /* PomodoroTests */ = {
 			isa = PBXGroup;
 			children = (
-				0487FF283085809600D237F4 /* PomodoroTests.swift */,
+				0487FF7730897E6E00D237F4 /* ContentViewModelTests.swift */,
+				0487FF723089567700D237F4 /* CountdownTimerTests.swift */,
 				0487FF7030886AF600D237F4 /* DefaultsStorageTests.swift */,
+				0487FF283085809600D237F4 /* PomodoroTests.swift */,
 			);
 			path = PomodoroTests;
 			sourceTree = "<group>";
@@ -194,6 +202,15 @@
 				0487FF6930885AE000D237F4 /* Theme.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		0487FF743089622000D237F4 /* CountdownTimer */ = {
+			isa = PBXGroup;
+			children = (
+				0487FF4E30858A2700D237F4 /* CountdownTimer.swift */,
+				0487FF753089623F00D237F4 /* TimerClock.swift */,
+			);
+			path = CountdownTimer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,6 +353,7 @@
 				0487FF6C3088600600D237F4 /* SessionTime.swift in Sources */,
 				0487FF623085B01700D237F4 /* SessionModePicker.swift in Sources */,
 				0487FF643085BA2E00D237F4 /* PlayControls.swift in Sources */,
+				0487FF763089623F00D237F4 /* TimerClock.swift in Sources */,
 				0487FF4F30858A2700D237F4 /* CountdownTimer.swift in Sources */,
 				0487FF47308587BA00D237F4 /* LocalKey.swift in Sources */,
 				0487FF52308592DD00D237F4 /* DefaultsStorage.swift in Sources */,
@@ -350,6 +368,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0487FF7830897E6E00D237F4 /* ContentViewModelTests.swift in Sources */,
+				0487FF733089567700D237F4 /* CountdownTimerTests.swift in Sources */,
 				0487FF293085809600D237F4 /* PomodoroTests.swift in Sources */,
 				0487FF7130886AF600D237F4 /* DefaultsStorageTests.swift in Sources */,
 			);

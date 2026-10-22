@@ -9,7 +9,10 @@ import SwiftUI
 
 @MainActor
 struct ContentView: View {
+    @Environment(\.scenePhase) private var scenePhase
+
     @State private var vm: ContentViewModel
+
     init(defaultsStorage: DefaultsStorage) {
         let vm = ContentViewModel(defaultsStorage: defaultsStorage)
         _vm = State(initialValue: vm)
@@ -34,15 +37,43 @@ struct ContentView: View {
                 onCancel: { vm.didCancel() },
                 onReset: { vm.didReset() }
             )
-            SessionModePicker(selection: $vm.currentMode)
+            SessionModePicker(selection: sessionModeBinding)
             IntervalSettingsView(
-                workMinutes: $vm.workMinutes,
-                breakMinutes: $vm.breakMinutes
+                workMinutes: workMinutesBinding,
+                breakMinutes: breakMinutesBinding
             )
             CompletedSessionsView(completedSessions: vm.completedSessions)
         }
         .padding()
         .tint(Theme.tint)
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .background || newPhase == .inactive {
+                vm.saveTimeRemaining()
+            }
+        }
+    }
+
+    private var sessionModeBinding: Binding<SessionMode> {
+        Binding<SessionMode>(
+            get: { self.vm.currentMode },
+            set: { newValue in
+                self.vm.setSessionModeAndResetTimer(newMode: newValue)
+            }
+        )
+    }
+
+    private var breakMinutesBinding: Binding<Int>{
+        Binding<Int>(
+            get: { self.vm.breakMinutes },
+            set: { newValue in self.vm.setBreakMinutes(newValue) }
+        )
+    }
+
+    private var workMinutesBinding: Binding<Int>{
+        Binding<Int>(
+            get: { self.vm.workMinutes },
+            set: { newValue in self.vm.setWorkMinutes(newValue) }
+        )
     }
 }
 

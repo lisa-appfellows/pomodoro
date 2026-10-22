@@ -13,26 +13,14 @@ final class ContentViewModel {
     private var defaultsStorage: DefaultsStorage
 
     var isPlaying = false {
-        didSet {
-            isPlaying ?
-            timer?.start() : 
-            timer?.pause()
-        }
+        didSet { playStateChanged() }
     }
 
-    var currentMode: SessionMode = .defaultMode {
-        didSet { defaultsStorage.sessionMode = currentMode }
-    }
+    private(set) var currentMode: SessionMode
+    private(set) var breakMinutes: Int
+    private(set) var workMinutes: Int
 
-    var breakMinutes: Int = SessionTime.defaultBreakMinutes {
-        didSet { defaultsStorage.breakMinutes = breakMinutes }
-    }
-
-    var workMinutes: Int = SessionTime.defaultWorkMinutes {
-        didSet { defaultsStorage.workMinutes = workMinutes }
-    }
-
-    var completedSessions: Int {
+    private(set) var completedSessions: Int {
         didSet { defaultsStorage.completedSessions = completedSessions }
     }
 
@@ -40,7 +28,7 @@ final class ContentViewModel {
 
     var currentInterval: TimeInterval {
         let minutes = currentMode == .break ? breakMinutes : workMinutes
-        return TimeInterval(minutes * 60)
+        return SessionTime.asInterval(minutes)
     }
 
     init(defaultsStorage: DefaultsStorage = .shared, timer: (any CountdownTiming)? = nil) {
@@ -54,13 +42,13 @@ final class ContentViewModel {
     }
 
     func didReset() {
-        timer?.reset(with: currentInterval)
+        isPlaying = false
+        resetTimerInterval()
     }
 
     func didCancel() {
-        timer?.pause()
-        currentMode = .work
-        timer?.reset(with: currentInterval)
+        isPlaying = false
+        setSessionModeAndResetTimer(newMode: .work)
         completedSessions = 0
     }
 
@@ -69,22 +57,70 @@ final class ContentViewModel {
     }
 
     private func attachTimer() {
-        let timeRemaining = defaultsStorage.timeRemaining
+        var timeRemaining = defaultsStorage.timeRemaining
+        if timeRemaining == 0 { timeRemaining = currentInterval }
         timer?.set(for: timeRemaining)
         timer?.didFinish = { [weak self] in
             self?.switchModesAndStartNew()
         }
     }
 
+    private func resetTimerInterval() {
+        let newTimeRemaining = currentInterval
+        timer?.reset(with: newTimeRemaining)
+        defaultsStorage.timeRemaining = newTimeRemaining
+    }
+
+    private func playStateChanged() {
+        if !isPlaying {
+            timer?.pause()
+            saveTimeRemaining()
+        } else {
+            timer?.start()
+        }
+    }
+
     private func switchModesAndStartNew() {
-        guard let timer, !timer.isRunning else { return }
+        if isPlaying { isPlaying = false }
         if currentMode == .break {
             completedSessions += 1
-            currentMode = .work
+            setSessionModeAndResetTimer(newMode: .work)
         } else {
-            currentMode = .break
+            setSessionModeAndResetTimer(newMode: .break)
         }
-        timer.reset(with: currentInterval)
-        timer.start()
+        isPlaying = true
+    }
+
+    func setSessionModeAndResetTimer(newMode: SessionMode) {
+        guard !isPlaying else { return }
+        currentMode = newMode
+        defaultsStorage.sessionMode = newMode
+        resetTimerInterval()
+    }
+
+    func setBreakMinutes(_ newMinutes: Int) {
+        if currentMode == .break {
+            if isPlaying { isPlaying = false }
+            breakMinutes = newMinutes
+            defaultsStorage.breakMinutes = breakMinutes
+            resetTimerInterval()
+            return
+        }
+
+        breakMinutes = newMinutes
+        defaultsStorage.breakMinutes = newMinutes
+    }
+
+    func setWorkMinutes(_ newMinutes: Int) {
+        if currentMode == .work {
+            if isPlaying { isPlaying = false }
+            workMinutes = newMinutes
+            defaultsStorage.workMinutes = newMinutes
+            resetTimerInterval()
+            return
+        }
+
+        workMinutes = newMinutes
+        defaultsStorage.workMinutes = newMinutes
     }
 }

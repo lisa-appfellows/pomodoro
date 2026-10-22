@@ -18,11 +18,11 @@ final class DefaultsStorageTests: XCTestCase {
 
         var storage = DefaultsStorage(defaults: defaults)
         // Starting defaults
-        XCTAssertEqual(storage.breakMinutes, 0)
+        XCTAssertEqual(storage.breakMinutes, SessionTime.defaultBreakMinutes)
         XCTAssertEqual(storage.completedSessions, 0)
         XCTAssertEqual(storage.sessionMode, SessionMode.defaultMode)
         XCTAssertEqual(storage.timeRemaining, 0)
-        XCTAssertEqual(storage.workMinutes, 0)
+        XCTAssertEqual(storage.workMinutes, SessionTime.defaultWorkMinutes)
 
         storage.breakMinutes = 5
         storage.completedSessions = 4
