@@ -1,5 +1,5 @@
 //
-//  ContentViewModel.swift
+//  SessionViewModel.swift
 //  Pomodoro
 //
 //  Created by Lisa Fellows on 2026-10-18.
@@ -9,8 +9,10 @@ import Foundation
 
 @MainActor
 @Observable
-final class ContentViewModel {
+final class SessionViewModel {
     private var defaultsStorage: DefaultsStorage
+
+    var settingsIsPresented = false
 
     var isPlaying = false {
         didSet { playStateChanged() }
@@ -20,6 +22,10 @@ final class ContentViewModel {
     private(set) var breakMinutes: Int
     private(set) var workMinutes: Int
 
+    var targetedSessionCount: Int {
+        didSet { defaultsStorage.targetedSessionCount = targetedSessionCount }
+    }
+
     private(set) var completedSessions: Int {
         didSet { defaultsStorage.completedSessions = completedSessions }
     }
@@ -28,7 +34,7 @@ final class ContentViewModel {
 
     var currentInterval: TimeInterval {
         let minutes = currentMode == .break ? breakMinutes : workMinutes
-        return SessionTime.asInterval(minutes)
+        return SessionMetrics.asInterval(minutes)
     }
 
     init(defaultsStorage: DefaultsStorage = .shared, timer: (any CountdownTiming)? = nil) {
@@ -36,6 +42,7 @@ final class ContentViewModel {
         self.currentMode = defaultsStorage.sessionMode
         self.breakMinutes = defaultsStorage.breakMinutes
         self.workMinutes = defaultsStorage.workMinutes
+        self.targetedSessionCount = defaultsStorage.targetedSessionCount
         self.completedSessions = defaultsStorage.completedSessions
         self.timer = timer ?? CountdownTimer()
         attachTimer()
@@ -82,12 +89,14 @@ final class ContentViewModel {
 
     private func switchModesAndStartNew() {
         if isPlaying { isPlaying = false }
-        if currentMode == .break {
-            completedSessions += 1
-            setSessionModeAndResetTimer(newMode: .work)
-        } else {
+        if currentMode == .work {
             setSessionModeAndResetTimer(newMode: .break)
+            isPlaying = true
+            return
         }
+        completedSessions += 1
+        setSessionModeAndResetTimer(newMode: .work)
+        if completedSessions >= targetedSessionCount { return }
         isPlaying = true
     }
 

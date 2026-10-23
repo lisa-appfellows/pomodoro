@@ -11,12 +11,12 @@ import XCTest
 final class PomodoroTests: XCTestCase {
     func testSessionTimeCreatesAppropriateIntervalFromMinutes() {
         let minutes = 5
-        let interval = SessionTime.asInterval(minutes)
+        let interval = SessionMetrics.asInterval(minutes)
         XCTAssertEqual(interval, 300)
     }
 
     func testSessionTimeProgressReturnsCorrectProgress() {
-        let progress = SessionTime.progress(
+        let progress = SessionMetrics.progress(
             remaining: 25,
             total: 100
         )
@@ -25,18 +25,18 @@ final class PomodoroTests: XCTestCase {
 
     func testSessionTimeFormatReturnsProperlyFormattedString() {
         let seconds: TimeInterval = 124
-        let formatted = SessionTime.format(for: seconds)
+        let formatted = SessionMetrics.format(for: seconds)
         XCTAssertEqual(formatted, "02:04")
     }
 
     func testLocalKeyLocalizesToAppropriateLanguage() {
-        var cancelEn = LocalKey.cancel
-        cancelEn.locale = Locale(identifier: "en")
-        XCTAssertEqual(String(localized: cancelEn), "Cancel")
+        var sessionsEn = LocalKey.sessions
+        sessionsEn.locale = Locale(identifier: "en")
+        XCTAssertEqual(String(localized: sessionsEn), "sessions")
 
-        var cancelEs = LocalKey.cancel
-        cancelEs.locale = Locale(identifier: "es")
-        XCTAssertEqual(String(localized: cancelEs), "Cancelar")
+        var sessionsEs = LocalKey.sessions
+        sessionsEs.locale = Locale(identifier: "es")
+        XCTAssertEqual(String(localized: sessionsEs), "sesiones")
     }
 
     func testInterpolatedLocalKeyReturnsInterpolatedLocalization() {

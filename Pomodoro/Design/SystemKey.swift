@@ -13,8 +13,13 @@ enum SystemKey {
     static let cupSaucerFill = "cup.and.saucer.fill"
     static let clock = "clock"
     static let flameFill = "flame.fill"
+    static let gear = "gear"
     static let minus = "minus"
     static let pauseFill = "pause.fill"
     static let playFill = "play.fill"
     static let plus = "plus"
+    static let stopFill = "stop.fill"
+    static let suitDiamondFill = "suit.diamond.fill"
+    static let target = "target"
+    static let xmarkCircle = "xmark.circle"
 }

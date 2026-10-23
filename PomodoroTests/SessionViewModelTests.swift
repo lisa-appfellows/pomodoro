@@ -1,5 +1,5 @@
 //
-//  ContentViewModelTests.swift
+//  SessionViewModelTests.swift
 //  PomodoroTests
 //
 //  Created by Lisa Fellows on 2026-10-21.
@@ -9,24 +9,24 @@ import XCTest
 @testable import Pomodoro
 
 @MainActor
-final class ContentViewModelTests: XCTestCase {
+final class SessionViewModelTests: XCTestCase {
     private var suiteName: String!
     private var defaults: UserDefaults!
     private var defaultsStorage: DefaultsStorage!
     private var timer: TestCountdownTimer!
-    private var sut: ContentViewModel!
+    private var sut: SessionViewModel!
 
-    private var newSut: ContentViewModel {
+    private var newSut: SessionViewModel {
         .init(defaultsStorage: defaultsStorage, timer: timer)
     }
 
-    private let defaultWorkMinutes = SessionTime.defaultWorkMinutes
-    private let defaultWorkInterval = SessionTime
-        .asInterval(SessionTime.defaultWorkMinutes)
+    private let defaultWorkMinutes = SessionMetrics.defaultWorkMinutes
+    private let defaultWorkInterval = SessionMetrics
+        .asInterval(SessionMetrics.defaultWorkMinutes)
 
-    private let defaultBreakMinutes = SessionTime.defaultBreakMinutes
-    private let defaultBreakInterval = SessionTime
-        .asInterval(SessionTime.defaultBreakMinutes)
+    private let defaultBreakMinutes = SessionMetrics.defaultBreakMinutes
+    private let defaultBreakInterval = SessionMetrics
+        .asInterval(SessionMetrics.defaultBreakMinutes)
 
     override func setUp() {
         super.setUp()
@@ -56,6 +56,7 @@ final class ContentViewModelTests: XCTestCase {
         XCTAssertEqual(sut.currentMode, .work)
         XCTAssertEqual(sut.breakMinutes, defaultBreakMinutes)
         XCTAssertEqual(sut.workMinutes, defaultWorkMinutes)
+        XCTAssertEqual(sut.targetedSessionCount, 4)
         XCTAssertEqual(sut.completedSessions, 0)
         XCTAssertEqual(timer.timeRemaining, sut.currentInterval)
         XCTAssertEqual(sut.currentInterval, defaultWorkInterval)
@@ -102,7 +103,7 @@ final class ContentViewModelTests: XCTestCase {
         XCTAssertEqual(defaultsStorage.workMinutes, defaultWorkMinutes)
 
         let newMinutes = 35
-        let newInterval = SessionTime.asInterval(newMinutes)
+        let newInterval = SessionMetrics.asInterval(newMinutes)
 
         sut.setWorkMinutes(newMinutes)
 
@@ -124,7 +125,7 @@ final class ContentViewModelTests: XCTestCase {
         XCTAssertEqual(defaultsStorage.breakMinutes, defaultBreakMinutes)
 
         let newMinutes = 35
-        let newInterval = SessionTime.asInterval(newMinutes)
+        let newInterval = SessionMetrics.asInterval(newMinutes)
     
         sut.setBreakMinutes(newMinutes)
 
@@ -142,7 +143,7 @@ final class ContentViewModelTests: XCTestCase {
         XCTAssertTrue(sut.isPlaying)
 
         let newMinutes = 35
-        let newInterval = SessionTime.asInterval(newMinutes)
+        let newInterval = SessionMetrics.asInterval(newMinutes)
 
         sut.setWorkMinutes(newMinutes)
 
@@ -159,7 +160,7 @@ final class ContentViewModelTests: XCTestCase {
         XCTAssertTrue(sut.isPlaying)
 
         let newMinutes = 35
-        let newInterval = SessionTime.asInterval(newMinutes)
+        let newInterval = SessionMetrics.asInterval(newMinutes)
 
         sut.setBreakMinutes(newMinutes)
 
@@ -176,7 +177,7 @@ final class ContentViewModelTests: XCTestCase {
         XCTAssertTrue(sut.isPlaying)
 
         let newMinutes = 15
-        let newInterval = SessionTime.asInterval(newMinutes)
+        let newInterval = SessionMetrics.asInterval(newMinutes)
 
         sut.setWorkMinutes(newMinutes)
 
@@ -192,7 +193,7 @@ final class ContentViewModelTests: XCTestCase {
         XCTAssertTrue(sut.isPlaying)
 
         let newMinutes = 15
-        let newInterval = SessionTime.asInterval(newMinutes)
+        let newInterval = SessionMetrics.asInterval(newMinutes)
 
         sut.setBreakMinutes(newMinutes)
 
@@ -201,6 +202,19 @@ final class ContentViewModelTests: XCTestCase {
         XCTAssertNotEqual(sut.currentInterval, newInterval)
         XCTAssertNotEqual(timer.timeRemaining, newInterval)
         XCTAssertEqual(defaultsStorage.breakMinutes, newMinutes)
+    }
+
+    func testTargetedSessionCountSetsAndPersists() {
+        XCTAssertEqual(sut.targetedSessionCount, 4) // default
+        XCTAssertEqual(defaultsStorage.targetedSessionCount, 4)
+
+        sut.targetedSessionCount = 6
+
+        XCTAssertEqual(sut.targetedSessionCount, 6)
+        XCTAssertEqual(defaultsStorage.targetedSessionCount, 6)
+
+        let newSut = newSut
+        XCTAssertEqual(newSut.targetedSessionCount, 6)
     }
 
     func testCompletedSessionsSetsAndPersists() {
@@ -226,7 +240,7 @@ final class ContentViewModelTests: XCTestCase {
         XCTAssertEqual(defaultsStorage.timeRemaining, 60)
 
         let newSut = newSut
-        XCTAssertEqual(timer.timeRemaining, 60)
+        XCTAssertEqual(newSut.timer?.timeRemaining, 60)
     }
 
     func testResetStopsPlayingAndResetsWithCurrentInterval() {
@@ -335,6 +349,25 @@ final class ContentViewModelTests: XCTestCase {
         XCTAssertTrue(sut.isPlaying)
         XCTAssertTrue(timer.isRunning)
         XCTAssertEqual(timer.timeRemaining, 15*60)
+    }
+
+    func testSwitchModesDoesNotSwitchOnTargetCountCompletion() {
+        sut.targetedSessionCount = 1
+        sut.isPlaying = true
+
+        XCTAssertEqual(sut.completedSessions, 0)
+        XCTAssertEqual(sut.currentMode, .work)
+        XCTAssertTrue(sut.isPlaying)
+
+        timer.callDidFinish()
+        XCTAssertEqual(sut.completedSessions, 0)
+        XCTAssertEqual(sut.currentMode, .break)
+        XCTAssertTrue(sut.isPlaying)
+
+        timer.callDidFinish()
+        XCTAssertEqual(sut.completedSessions, 1)
+        XCTAssertEqual(sut.currentMode, .work)
+        XCTAssertFalse(sut.isPlaying, "Should not have started new session on target completion")
     }
 }
 

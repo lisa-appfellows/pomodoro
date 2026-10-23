@@ -1,13 +1,28 @@
 //
-//  SessionModePicker.swift
+//  SettingsModeSection.swift
 //  Pomodoro
 //
-//  Created by Lisa Fellows on 2026-10-18.
+//  Created by Lisa Fellows on 2026-10-22.
 //
 
 import SwiftUI
 
-struct SessionModePicker: View {
+struct SettingsModeSection: View {
+    @Binding var selection: SessionMode
+    let currentMode: SessionMode
+    
+    var body: some View {
+        SettingsSection(
+            icon: Theme.sessionIcon(currentMode),
+            title: LocalKey.sessionMode,
+            subtitle: LocalKey.sessionModeSub
+        ) {
+            SessionModePicker(selection: $selection)
+        }
+    }
+}
+
+private struct SessionModePicker: View {
     @Binding var selection: SessionMode
 
     var body: some View {
@@ -25,8 +40,4 @@ struct SessionModePicker: View {
         LocalKey.break
         return String(localized: resource)
     }
-}
-
-#Preview {
-    SessionModePicker(selection: .constant(.break))
 }

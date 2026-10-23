@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0487FF183085809500D237F4 /* PomodoroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF173085809500D237F4 /* PomodoroApp.swift */; };
-		0487FF1A3085809500D237F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF193085809500D237F4 /* ContentView.swift */; };
 		0487FF1C3085809600D237F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0487FF1B3085809600D237F4 /* Assets.xcassets */; };
 		0487FF1F3085809600D237F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0487FF1E3085809600D237F4 /* Preview Assets.xcassets */; };
 		0487FF293085809600D237F4 /* PomodoroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF283085809600D237F4 /* PomodoroTests.swift */; };
@@ -17,21 +16,28 @@
 		0487FF45308586D700D237F4 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 0487FF44308586D700D237F4 /* Localizable.xcstrings */; };
 		0487FF47308587BA00D237F4 /* LocalKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF46308587BA00D237F4 /* LocalKey.swift */; };
 		0487FF49308588BD00D237F4 /* SystemKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF48308588BD00D237F4 /* SystemKey.swift */; };
-		0487FF4D308589B100D237F4 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF4C308589B100D237F4 /* ContentViewModel.swift */; };
+		0487FF4D308589B100D237F4 /* SessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF4C308589B100D237F4 /* SessionViewModel.swift */; };
 		0487FF4F30858A2700D237F4 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF4E30858A2700D237F4 /* CountdownTimer.swift */; };
 		0487FF52308592DD00D237F4 /* DefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF51308592DD00D237F4 /* DefaultsStorage.swift */; };
 		0487FF5730859B9400D237F4 /* SessionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF5630859B9400D237F4 /* SessionMode.swift */; };
-		0487FF5E3085AC8B00D237F4 /* IntervalSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF5D3085AC8B00D237F4 /* IntervalSettingsView.swift */; };
-		0487FF603085AD3B00D237F4 /* CompletedSessionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF5F3085AD3B00D237F4 /* CompletedSessionsView.swift */; };
-		0487FF623085B01700D237F4 /* SessionModePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF613085B01700D237F4 /* SessionModePicker.swift */; };
-		0487FF643085BA2E00D237F4 /* PlayControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF633085BA2E00D237F4 /* PlayControls.swift */; };
-		0487FF663085BBF900D237F4 /* ProgressRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF653085BBF900D237F4 /* ProgressRingView.swift */; };
 		0487FF6A30885AE000D237F4 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF6930885AE000D237F4 /* Theme.swift */; };
-		0487FF6C3088600600D237F4 /* SessionTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF6B3088600600D237F4 /* SessionTime.swift */; };
+		0487FF6C3088600600D237F4 /* SessionMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF6B3088600600D237F4 /* SessionMetrics.swift */; };
 		0487FF7130886AF600D237F4 /* DefaultsStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF7030886AF600D237F4 /* DefaultsStorageTests.swift */; };
 		0487FF733089567700D237F4 /* CountdownTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF723089567700D237F4 /* CountdownTimerTests.swift */; };
 		0487FF763089623F00D237F4 /* TimerClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF753089623F00D237F4 /* TimerClock.swift */; };
-		0487FF7830897E6E00D237F4 /* ContentViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF7730897E6E00D237F4 /* ContentViewModelTests.swift */; };
+		0487FF7830897E6E00D237F4 /* SessionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF7730897E6E00D237F4 /* SessionViewModelTests.swift */; };
+		0487FF7A308AA7E700D237F4 /* MainTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF79308AA7E700D237F4 /* MainTimerView.swift */; };
+		0487FF7C308ABD4100D237F4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF7B308ABD4100D237F4 /* SettingsView.swift */; };
+		0487FF7E308ABEE700D237F4 /* PreviewSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF7D308ABEE700D237F4 /* PreviewSupport.swift */; };
+		0487FF82308ACE3100D237F4 /* TimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF81308ACE3100D237F4 /* TimerProgressView.swift */; };
+		0487FF84308ACE5400D237F4 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF83308ACE5400D237F4 /* ControlView.swift */; };
+		0487FF86308ACE7A00D237F4 /* CompletedSessionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF85308ACE7A00D237F4 /* CompletedSessionTextView.swift */; };
+		0487FF89308ACE9F00D237F4 /* AppTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF88308ACE9F00D237F4 /* AppTitleView.swift */; };
+		0487FF8B308ACEB600D237F4 /* SettingsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF8A308ACEB600D237F4 /* SettingsButton.swift */; };
+		0487FF90308ACF1F00D237F4 /* SettingsIntervalSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF8F308ACF1F00D237F4 /* SettingsIntervalSection.swift */; };
+		0487FF94308ACFBB00D237F4 /* SettingsModeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF93308ACFBB00D237F4 /* SettingsModeSection.swift */; };
+		0487FF97308AD4A100D237F4 /* SettingsSessionTargetSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF96308AD4A100D237F4 /* SettingsSessionTargetSection.swift */; };
+		0487FF99308ADAAF00D237F4 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF98308ADAAF00D237F4 /* SettingsSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +60,6 @@
 /* Begin PBXFileReference section */
 		0487FF143085809500D237F4 /* Pomodoro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pomodoro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0487FF173085809500D237F4 /* PomodoroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroApp.swift; sourceTree = "<group>"; };
-		0487FF193085809500D237F4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0487FF1B3085809600D237F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0487FF1E3085809600D237F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0487FF243085809600D237F4 /* PomodoroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomodoroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,21 +70,28 @@
 		0487FF44308586D700D237F4 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		0487FF46308587BA00D237F4 /* LocalKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalKey.swift; sourceTree = "<group>"; };
 		0487FF48308588BD00D237F4 /* SystemKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemKey.swift; sourceTree = "<group>"; };
-		0487FF4C308589B100D237F4 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		0487FF4C308589B100D237F4 /* SessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewModel.swift; sourceTree = "<group>"; };
 		0487FF4E30858A2700D237F4 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
 		0487FF51308592DD00D237F4 /* DefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsStorage.swift; sourceTree = "<group>"; };
 		0487FF5630859B9400D237F4 /* SessionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionMode.swift; sourceTree = "<group>"; };
-		0487FF5D3085AC8B00D237F4 /* IntervalSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalSettingsView.swift; sourceTree = "<group>"; };
-		0487FF5F3085AD3B00D237F4 /* CompletedSessionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedSessionsView.swift; sourceTree = "<group>"; };
-		0487FF613085B01700D237F4 /* SessionModePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionModePicker.swift; sourceTree = "<group>"; };
-		0487FF633085BA2E00D237F4 /* PlayControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayControls.swift; sourceTree = "<group>"; };
-		0487FF653085BBF900D237F4 /* ProgressRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRingView.swift; sourceTree = "<group>"; };
 		0487FF6930885AE000D237F4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		0487FF6B3088600600D237F4 /* SessionTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTime.swift; sourceTree = "<group>"; };
+		0487FF6B3088600600D237F4 /* SessionMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionMetrics.swift; sourceTree = "<group>"; };
 		0487FF7030886AF600D237F4 /* DefaultsStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsStorageTests.swift; sourceTree = "<group>"; };
 		0487FF723089567700D237F4 /* CountdownTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimerTests.swift; sourceTree = "<group>"; };
 		0487FF753089623F00D237F4 /* TimerClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerClock.swift; sourceTree = "<group>"; };
-		0487FF7730897E6E00D237F4 /* ContentViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModelTests.swift; sourceTree = "<group>"; };
+		0487FF7730897E6E00D237F4 /* SessionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewModelTests.swift; sourceTree = "<group>"; };
+		0487FF79308AA7E700D237F4 /* MainTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTimerView.swift; sourceTree = "<group>"; };
+		0487FF7B308ABD4100D237F4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		0487FF7D308ABEE700D237F4 /* PreviewSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSupport.swift; sourceTree = "<group>"; };
+		0487FF81308ACE3100D237F4 /* TimerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProgressView.swift; sourceTree = "<group>"; };
+		0487FF83308ACE5400D237F4 /* ControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlView.swift; sourceTree = "<group>"; };
+		0487FF85308ACE7A00D237F4 /* CompletedSessionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedSessionTextView.swift; sourceTree = "<group>"; };
+		0487FF88308ACE9F00D237F4 /* AppTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTitleView.swift; sourceTree = "<group>"; };
+		0487FF8A308ACEB600D237F4 /* SettingsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButton.swift; sourceTree = "<group>"; };
+		0487FF8F308ACF1F00D237F4 /* SettingsIntervalSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsIntervalSection.swift; sourceTree = "<group>"; };
+		0487FF93308ACFBB00D237F4 /* SettingsModeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModeSection.swift; sourceTree = "<group>"; };
+		0487FF96308AD4A100D237F4 /* SettingsSessionTargetSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSessionTargetSection.swift; sourceTree = "<group>"; };
+		0487FF98308ADAAF00D237F4 /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,13 +143,12 @@
 			isa = PBXGroup;
 			children = (
 				0487FF173085809500D237F4 /* PomodoroApp.swift */,
-				0487FF193085809500D237F4 /* ContentView.swift */,
-				0487FF4C308589B100D237F4 /* ContentViewModel.swift */,
-				0487FF5330859A8100D237F4 /* Components */,
+				0487FF6D308865FE00D237F4 /* Design */,
+				0487FF9A308AE8E600D237F4 /* Features */,
+				0487FF9B308AE90500D237F4 /* Session */,
 				0487FF743089622000D237F4 /* CountdownTimer */,
 				0487FF1D3085809600D237F4 /* Preview Content */,
 				0487FF43308586CE00D237F4 /* Resources */,
-				0487FF6D308865FE00D237F4 /* Shared */,
 			);
 			path = Pomodoro;
 			sourceTree = "<group>";
@@ -146,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				0487FF1E3085809600D237F4 /* Preview Assets.xcassets */,
+				0487FF7D308ABEE700D237F4 /* PreviewSupport.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -153,10 +165,10 @@
 		0487FF273085809600D237F4 /* PomodoroTests */ = {
 			isa = PBXGroup;
 			children = (
-				0487FF7730897E6E00D237F4 /* ContentViewModelTests.swift */,
 				0487FF723089567700D237F4 /* CountdownTimerTests.swift */,
 				0487FF7030886AF600D237F4 /* DefaultsStorageTests.swift */,
 				0487FF283085809600D237F4 /* PomodoroTests.swift */,
+				0487FF7730897E6E00D237F4 /* SessionViewModelTests.swift */,
 			);
 			path = PomodoroTests;
 			sourceTree = "<group>";
@@ -179,29 +191,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		0487FF5330859A8100D237F4 /* Components */ = {
+		0487FF6D308865FE00D237F4 /* Design */ = {
 			isa = PBXGroup;
 			children = (
-				0487FF5F3085AD3B00D237F4 /* CompletedSessionsView.swift */,
-				0487FF5D3085AC8B00D237F4 /* IntervalSettingsView.swift */,
-				0487FF653085BBF900D237F4 /* ProgressRingView.swift */,
-				0487FF633085BA2E00D237F4 /* PlayControls.swift */,
-				0487FF613085B01700D237F4 /* SessionModePicker.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		0487FF6D308865FE00D237F4 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				0487FF51308592DD00D237F4 /* DefaultsStorage.swift */,
 				0487FF46308587BA00D237F4 /* LocalKey.swift */,
-				0487FF5630859B9400D237F4 /* SessionMode.swift */,
-				0487FF6B3088600600D237F4 /* SessionTime.swift */,
 				0487FF48308588BD00D237F4 /* SystemKey.swift */,
 				0487FF6930885AE000D237F4 /* Theme.swift */,
 			);
-			path = Shared;
+			path = Design;
 			sourceTree = "<group>";
 		};
 		0487FF743089622000D237F4 /* CountdownTimer */ = {
@@ -211,6 +208,67 @@
 				0487FF753089623F00D237F4 /* TimerClock.swift */,
 			);
 			path = CountdownTimer;
+			sourceTree = "<group>";
+		};
+		0487FF7F308ACE0800D237F4 /* MainTimerView */ = {
+			isa = PBXGroup;
+			children = (
+				0487FF79308AA7E700D237F4 /* MainTimerView.swift */,
+				0487FF87308ACE9100D237F4 /* Components */,
+			);
+			path = MainTimerView;
+			sourceTree = "<group>";
+		};
+		0487FF80308ACE1100D237F4 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				0487FF7B308ABD4100D237F4 /* SettingsView.swift */,
+				0487FF8C308ACEFB00D237F4 /* Components */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		0487FF87308ACE9100D237F4 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0487FF88308ACE9F00D237F4 /* AppTitleView.swift */,
+				0487FF85308ACE7A00D237F4 /* CompletedSessionTextView.swift */,
+				0487FF83308ACE5400D237F4 /* ControlView.swift */,
+				0487FF8A308ACEB600D237F4 /* SettingsButton.swift */,
+				0487FF81308ACE3100D237F4 /* TimerProgressView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		0487FF8C308ACEFB00D237F4 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0487FF98308ADAAF00D237F4 /* SettingsSection.swift */,
+				0487FF8F308ACF1F00D237F4 /* SettingsIntervalSection.swift */,
+				0487FF93308ACFBB00D237F4 /* SettingsModeSection.swift */,
+				0487FF96308AD4A100D237F4 /* SettingsSessionTargetSection.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		0487FF9A308AE8E600D237F4 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				0487FF7F308ACE0800D237F4 /* MainTimerView */,
+				0487FF80308ACE1100D237F4 /* SettingsView */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		0487FF9B308AE90500D237F4 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				0487FF51308592DD00D237F4 /* DefaultsStorage.swift */,
+				0487FF6B3088600600D237F4 /* SessionMetrics.swift */,
+				0487FF5630859B9400D237F4 /* SessionMode.swift */,
+				0487FF4C308589B100D237F4 /* SessionViewModel.swift */,
+			);
+			path = Session;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,20 +404,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				0487FF5730859B9400D237F4 /* SessionMode.swift in Sources */,
-				0487FF663085BBF900D237F4 /* ProgressRingView.swift in Sources */,
+				0487FF97308AD4A100D237F4 /* SettingsSessionTargetSection.swift in Sources */,
 				0487FF49308588BD00D237F4 /* SystemKey.swift in Sources */,
-				0487FF5E3085AC8B00D237F4 /* IntervalSettingsView.swift in Sources */,
-				0487FF4D308589B100D237F4 /* ContentViewModel.swift in Sources */,
-				0487FF6C3088600600D237F4 /* SessionTime.swift in Sources */,
-				0487FF623085B01700D237F4 /* SessionModePicker.swift in Sources */,
-				0487FF643085BA2E00D237F4 /* PlayControls.swift in Sources */,
+				0487FF94308ACFBB00D237F4 /* SettingsModeSection.swift in Sources */,
+				0487FF7C308ABD4100D237F4 /* SettingsView.swift in Sources */,
+				0487FF8B308ACEB600D237F4 /* SettingsButton.swift in Sources */,
+				0487FF4D308589B100D237F4 /* SessionViewModel.swift in Sources */,
+				0487FF99308ADAAF00D237F4 /* SettingsSection.swift in Sources */,
+				0487FF6C3088600600D237F4 /* SessionMetrics.swift in Sources */,
 				0487FF763089623F00D237F4 /* TimerClock.swift in Sources */,
 				0487FF4F30858A2700D237F4 /* CountdownTimer.swift in Sources */,
+				0487FF82308ACE3100D237F4 /* TimerProgressView.swift in Sources */,
+				0487FF86308ACE7A00D237F4 /* CompletedSessionTextView.swift in Sources */,
+				0487FF7A308AA7E700D237F4 /* MainTimerView.swift in Sources */,
 				0487FF47308587BA00D237F4 /* LocalKey.swift in Sources */,
 				0487FF52308592DD00D237F4 /* DefaultsStorage.swift in Sources */,
-				0487FF1A3085809500D237F4 /* ContentView.swift in Sources */,
-				0487FF603085AD3B00D237F4 /* CompletedSessionsView.swift in Sources */,
+				0487FF7E308ABEE700D237F4 /* PreviewSupport.swift in Sources */,
 				0487FF183085809500D237F4 /* PomodoroApp.swift in Sources */,
+				0487FF84308ACE5400D237F4 /* ControlView.swift in Sources */,
+				0487FF89308ACE9F00D237F4 /* AppTitleView.swift in Sources */,
+				0487FF90308ACF1F00D237F4 /* SettingsIntervalSection.swift in Sources */,
 				0487FF6A30885AE000D237F4 /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,7 +432,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0487FF7830897E6E00D237F4 /* ContentViewModelTests.swift in Sources */,
+				0487FF7830897E6E00D237F4 /* SessionViewModelTests.swift in Sources */,
 				0487FF733089567700D237F4 /* CountdownTimerTests.swift in Sources */,
 				0487FF293085809600D237F4 /* PomodoroTests.swift in Sources */,
 				0487FF7130886AF600D237F4 /* DefaultsStorageTests.swift in Sources */,
@@ -534,7 +598,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -542,9 +606,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.appfellows.Pomodoro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -563,7 +631,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -571,9 +639,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.appfellows.Pomodoro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

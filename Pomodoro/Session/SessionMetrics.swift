@@ -1,5 +1,5 @@
 //
-//  SessionTime.swift
+//  SessionMetrics.swift
 //  Pomodoro
 //
 //  Created by Lisa Fellows on 2026-10-20.
@@ -7,9 +7,11 @@
 
 import Foundation
 
-enum SessionTime {
+enum SessionMetrics {
     static let defaultBreakMinutes: Int = 5
     static let defaultWorkMinutes: Int = 25
+    static let defaultTargetedSessionCount = 4
+    static let targetedSessionRange = 1...10
 
     static func asInterval(_ minutes: Int) -> TimeInterval {
         TimeInterval(minutes * 60)

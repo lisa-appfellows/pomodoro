@@ -14,8 +14,9 @@ struct DefaultsStorage {
     init(defaults: UserDefaults) {
         self.defaults = defaults
         defaults.register(defaults: [
-            breakMinutesKey: SessionTime.defaultBreakMinutes,
-            workMinutesKey: SessionTime.defaultWorkMinutes
+            breakMinutesKey: SessionMetrics.defaultBreakMinutes,
+            workMinutesKey: SessionMetrics.defaultWorkMinutes,
+            targetedSessionCountKey: SessionMetrics.defaultTargetedSessionCount
         ])
     }
 
@@ -40,6 +41,12 @@ struct DefaultsStorage {
         set {
             defaults.set(newValue.rawValue, forKey: sessionModeKey)
         }
+    }
+
+    private let targetedSessionCountKey = "targetedSessionCount"
+    var targetedSessionCount: Int {
+        get { defaults.integer(forKey: targetedSessionCountKey) }
+        set { defaults.set(newValue, forKey: targetedSessionCountKey) }
     }
 
     private let timeRemainingKey = "timeRemaining"
