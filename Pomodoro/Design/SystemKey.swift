@@ -12,7 +12,6 @@ enum SystemKey {
     static let booksVerticalFill = "books.vertical.fill"
     static let cupSaucerFill = "cup.and.saucer.fill"
     static let clock = "clock"
-    static let flameFill = "flame.fill"
     static let gear = "gear"
     static let minus = "minus"
     static let pauseFill = "pause.fill"

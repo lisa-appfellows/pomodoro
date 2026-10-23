@@ -28,7 +28,7 @@ struct MainTimerView: View {
             )
             Spacer()
             ControlView(
-                isPlaying: $vm.isPlaying,
+                isPlaying: isPlayingBinding,
                 onReset: { vm.didReset() },
                 onCancel: { vm.didCancel() }
             )
@@ -53,6 +53,13 @@ struct MainTimerView: View {
                 vm.saveTimeRemaining()
             }
         }
+    }
+
+    private var isPlayingBinding: Binding<Bool> {
+        Binding<Bool>(
+            get: { vm.isPlaying },
+            set: { newValue in vm.setIsPlaying(newValue) }
+        )
     }
 }
 

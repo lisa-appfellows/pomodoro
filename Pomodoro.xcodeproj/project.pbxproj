@@ -38,6 +38,12 @@
 		0487FF94308ACFBB00D237F4 /* SettingsModeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF93308ACFBB00D237F4 /* SettingsModeSection.swift */; };
 		0487FF97308AD4A100D237F4 /* SettingsSessionTargetSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF96308AD4A100D237F4 /* SettingsSessionTargetSection.swift */; };
 		0487FF99308ADAAF00D237F4 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF98308ADAAF00D237F4 /* SettingsSection.swift */; };
+		0487FF9E308AEF7300D237F4 /* HapticEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF9D308AEF7300D237F4 /* HapticEngine.swift */; };
+		0487FFA0308AF44F00D237F4 /* HapticPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FF9F308AF44F00D237F4 /* HapticPattern.swift */; };
+		0487FFA9308B0A2D00D237F4 /* LightBell.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0487FFA8308B0A2D00D237F4 /* LightBell.wav */; };
+		0487FFAB308B0A3300D237F4 /* MediumBell.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0487FFAA308B0A3300D237F4 /* MediumBell.wav */; };
+		0487FFAD308B0AAF00D237F4 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FFAC308B0AAF00D237F4 /* Alarm.swift */; };
+		0487FFAF308B0AEF00D237F4 /* AlarmPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487FFAE308B0AEF00D237F4 /* AlarmPlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +98,12 @@
 		0487FF93308ACFBB00D237F4 /* SettingsModeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModeSection.swift; sourceTree = "<group>"; };
 		0487FF96308AD4A100D237F4 /* SettingsSessionTargetSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSessionTargetSection.swift; sourceTree = "<group>"; };
 		0487FF98308ADAAF00D237F4 /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
+		0487FF9D308AEF7300D237F4 /* HapticEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticEngine.swift; sourceTree = "<group>"; };
+		0487FF9F308AF44F00D237F4 /* HapticPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticPattern.swift; sourceTree = "<group>"; };
+		0487FFA8308B0A2D00D237F4 /* LightBell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = LightBell.wav; sourceTree = "<group>"; };
+		0487FFAA308B0A3300D237F4 /* MediumBell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MediumBell.wav; sourceTree = "<group>"; };
+		0487FFAC308B0AAF00D237F4 /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
+		0487FFAE308B0AEF00D237F4 /* AlarmPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +157,7 @@
 				0487FF173085809500D237F4 /* PomodoroApp.swift */,
 				0487FF6D308865FE00D237F4 /* Design */,
 				0487FF9A308AE8E600D237F4 /* Features */,
+				0487FF9C308AEF5200D237F4 /* Feedback */,
 				0487FF9B308AE90500D237F4 /* Session */,
 				0487FF743089622000D237F4 /* CountdownTimer */,
 				0487FF1D3085809600D237F4 /* Preview Content */,
@@ -187,6 +200,7 @@
 			children = (
 				0487FF1B3085809600D237F4 /* Assets.xcassets */,
 				0487FF44308586D700D237F4 /* Localizable.xcstrings */,
+				0487FFA1308B075900D237F4 /* Audio */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -269,6 +283,26 @@
 				0487FF4C308589B100D237F4 /* SessionViewModel.swift */,
 			);
 			path = Session;
+			sourceTree = "<group>";
+		};
+		0487FF9C308AEF5200D237F4 /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				0487FFAC308B0AAF00D237F4 /* Alarm.swift */,
+				0487FFAE308B0AEF00D237F4 /* AlarmPlayer.swift */,
+				0487FF9D308AEF7300D237F4 /* HapticEngine.swift */,
+				0487FF9F308AF44F00D237F4 /* HapticPattern.swift */,
+			);
+			path = Feedback;
+			sourceTree = "<group>";
+		};
+		0487FFA1308B075900D237F4 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				0487FFAA308B0A3300D237F4 /* MediumBell.wav */,
+				0487FFA8308B0A2D00D237F4 /* LightBell.wav */,
+			);
+			path = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -376,7 +410,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0487FFA9308B0A2D00D237F4 /* LightBell.wav in Resources */,
 				0487FF1F3085809600D237F4 /* Preview Assets.xcassets in Resources */,
+				0487FFAB308B0A3300D237F4 /* MediumBell.wav in Resources */,
 				0487FF45308586D700D237F4 /* Localizable.xcstrings in Resources */,
 				0487FF1C3085809600D237F4 /* Assets.xcassets in Resources */,
 			);
@@ -413,9 +449,12 @@
 				0487FF99308ADAAF00D237F4 /* SettingsSection.swift in Sources */,
 				0487FF6C3088600600D237F4 /* SessionMetrics.swift in Sources */,
 				0487FF763089623F00D237F4 /* TimerClock.swift in Sources */,
+				0487FFAF308B0AEF00D237F4 /* AlarmPlayer.swift in Sources */,
 				0487FF4F30858A2700D237F4 /* CountdownTimer.swift in Sources */,
 				0487FF82308ACE3100D237F4 /* TimerProgressView.swift in Sources */,
+				0487FFAD308B0AAF00D237F4 /* Alarm.swift in Sources */,
 				0487FF86308ACE7A00D237F4 /* CompletedSessionTextView.swift in Sources */,
+				0487FFA0308AF44F00D237F4 /* HapticPattern.swift in Sources */,
 				0487FF7A308AA7E700D237F4 /* MainTimerView.swift in Sources */,
 				0487FF47308587BA00D237F4 /* LocalKey.swift in Sources */,
 				0487FF52308592DD00D237F4 /* DefaultsStorage.swift in Sources */,
@@ -425,6 +464,7 @@
 				0487FF89308ACE9F00D237F4 /* AppTitleView.swift in Sources */,
 				0487FF90308ACF1F00D237F4 /* SettingsIntervalSection.swift in Sources */,
 				0487FF6A30885AE000D237F4 /* Theme.swift in Sources */,
+				0487FF9E308AEF7300D237F4 /* HapticEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
