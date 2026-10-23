@@ -14,6 +14,8 @@ final class SessionViewModel {
     private let hapticEngine: (any HapticEngineProtocol)
     private let alarmPlayer: (any AlarmPlaying)
 
+    var settingsIsPresented = false
+
     private(set) var isPlaying = false
     private(set) var currentMode: SessionMode
     private(set) var breakMinutes: Int
@@ -23,10 +25,6 @@ final class SessionViewModel {
 
     private(set) var completedSessions: Int {
         didSet { defaultsStorage.completedSessions = completedSessions }
-    }
-
-    var settingsIsPresented = false {
-        didSet { hapticEngine.play(.selection) }
     }
 
     var currentInterval: TimeInterval {

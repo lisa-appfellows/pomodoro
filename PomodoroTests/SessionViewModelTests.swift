@@ -389,13 +389,6 @@ final class SessionViewModelTests: XCTestCase {
 
 // MARK: - Haptics & Alarms
 extension SessionViewModelTests {
-    func testHapticOnSettingsPresentedShouldFireOnBothStates() {
-        XCTAssertTrue(hapticEngine.patternsFired.isEmpty)
-        sut.settingsIsPresented = true
-        sut.settingsIsPresented = false
-        XCTAssertEqual(hapticEngine.patternsFired, [.selection, .selection])
-    }
-
     func testHapticsOnResetShouldFireReset() {
         XCTAssertTrue(hapticEngine.patternsFired.isEmpty)
         sut.didReset()
