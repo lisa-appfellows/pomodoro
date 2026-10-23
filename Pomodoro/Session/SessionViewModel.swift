@@ -11,34 +11,38 @@ import Foundation
 @Observable
 final class SessionViewModel {
     private var defaultsStorage: DefaultsStorage
+    private let hapticEngine: (any HapticEngineProtocol)
+    private let alarmPlayer: (any AlarmPlaying)
 
-    var settingsIsPresented = false
-
-    var isPlaying = false {
-        didSet { playStateChanged() }
-    }
-
+    private(set) var isPlaying = false
     private(set) var currentMode: SessionMode
     private(set) var breakMinutes: Int
     private(set) var workMinutes: Int
-
-    var targetedSessionCount: Int {
-        didSet { defaultsStorage.targetedSessionCount = targetedSessionCount }
-    }
+    private(set) var targetedSessionCount: Int
+    private(set) var timer: (any CountdownTiming)?
 
     private(set) var completedSessions: Int {
         didSet { defaultsStorage.completedSessions = completedSessions }
     }
 
-    private(set) var timer: (any CountdownTiming)?
+    var settingsIsPresented = false {
+        didSet { hapticEngine.play(.selection) }
+    }
 
     var currentInterval: TimeInterval {
         let minutes = currentMode == .break ? breakMinutes : workMinutes
         return SessionMetrics.asInterval(minutes)
     }
 
-    init(defaultsStorage: DefaultsStorage = .shared, timer: (any CountdownTiming)? = nil) {
+    init(
+        defaultsStorage: DefaultsStorage = .shared,
+        hapticEngine: (any HapticEngineProtocol)? = nil,
+        alarmPlayer: (any AlarmPlaying)? = nil,
+        timer: (any CountdownTiming)? = nil
+    ) {
         self.defaultsStorage = defaultsStorage
+        self.hapticEngine = hapticEngine ?? HapticEngine.shared
+        self.alarmPlayer = alarmPlayer ?? AlarmPlayer.shared
         self.currentMode = defaultsStorage.sessionMode
         self.breakMinutes = defaultsStorage.breakMinutes
         self.workMinutes = defaultsStorage.workMinutes
@@ -49,14 +53,70 @@ final class SessionViewModel {
     }
 
     func didReset() {
-        isPlaying = false
+        hapticEngine.play(.reset)
+        setIsPlaying(false, playHaptic: false)
         resetTimerInterval()
     }
 
     func didCancel() {
-        isPlaying = false
-        setSessionModeAndResetTimer(newMode: .work)
+        hapticEngine.play(.cancel)
+        setIsPlaying(false, playHaptic: false)
+        setSessionModeAndResetTimer(newMode: .work, playHaptic: false)
         completedSessions = 0
+    }
+
+    func setIsPlaying(_ isPlaying: Bool, playHaptic: Bool = true) {
+        self.isPlaying = isPlaying
+        if !isPlaying {
+            if playHaptic { hapticEngine.play(.pause) }
+            timer?.pause()
+            saveTimeRemaining()
+        } else {
+            if playHaptic { hapticEngine.play(.play) }
+            timer?.start()
+        }
+    }
+
+    func setSessionModeAndResetTimer(newMode: SessionMode, playHaptic: Bool = true) {
+        guard !isPlaying else { return }
+        if playHaptic { hapticEngine.play(.selection) }
+        currentMode = newMode
+        defaultsStorage.sessionMode = newMode
+        resetTimerInterval()
+    }
+
+    func setBreakMinutes(_ newMinutes: Int) {
+        hapticEngine.play(newMinutes > breakMinutes ? .increase : .decrease)
+        if currentMode == .break {
+            if isPlaying { setIsPlaying(false, playHaptic: false) }
+            breakMinutes = newMinutes
+            defaultsStorage.breakMinutes = breakMinutes
+            resetTimerInterval()
+            return
+        }
+
+        breakMinutes = newMinutes
+        defaultsStorage.breakMinutes = newMinutes
+    }
+
+    func setWorkMinutes(_ newMinutes: Int) {
+        hapticEngine.play(newMinutes > workMinutes ? .increase : .decrease)
+        if currentMode == .work {
+            if isPlaying { setIsPlaying(false, playHaptic: false) }
+            workMinutes = newMinutes
+            defaultsStorage.workMinutes = newMinutes
+            resetTimerInterval()
+            return
+        }
+
+        workMinutes = newMinutes
+        defaultsStorage.workMinutes = newMinutes
+    }
+
+    func setTargetedSessionCount(_ newCount: Int) {
+        hapticEngine.play(newCount > targetedSessionCount ? .increase : .decrease)
+        targetedSessionCount = newCount
+        defaultsStorage.targetedSessionCount = targetedSessionCount
     }
 
     func saveTimeRemaining() {
@@ -78,58 +138,20 @@ final class SessionViewModel {
         defaultsStorage.timeRemaining = newTimeRemaining
     }
 
-    private func playStateChanged() {
-        if !isPlaying {
-            timer?.pause()
-            saveTimeRemaining()
-        } else {
-            timer?.start()
-        }
-    }
-
     private func switchModesAndStartNew() {
-        if isPlaying { isPlaying = false }
+        if isPlaying { setIsPlaying(false, playHaptic: false) }
         if currentMode == .work {
-            setSessionModeAndResetTimer(newMode: .break)
-            isPlaying = true
+            hapticEngine.play(.modeComplete)
+            alarmPlayer.play(.modeComplete)
+            setSessionModeAndResetTimer(newMode: .break, playHaptic: false)
+            setIsPlaying(true, playHaptic: false)
             return
         }
+        hapticEngine.play(.sessionComplete)
+        alarmPlayer.play(.sessionComplete)
         completedSessions += 1
-        setSessionModeAndResetTimer(newMode: .work)
+        setSessionModeAndResetTimer(newMode: .work, playHaptic: false)
         if completedSessions >= targetedSessionCount { return }
-        isPlaying = true
-    }
-
-    func setSessionModeAndResetTimer(newMode: SessionMode) {
-        guard !isPlaying else { return }
-        currentMode = newMode
-        defaultsStorage.sessionMode = newMode
-        resetTimerInterval()
-    }
-
-    func setBreakMinutes(_ newMinutes: Int) {
-        if currentMode == .break {
-            if isPlaying { isPlaying = false }
-            breakMinutes = newMinutes
-            defaultsStorage.breakMinutes = breakMinutes
-            resetTimerInterval()
-            return
-        }
-
-        breakMinutes = newMinutes
-        defaultsStorage.breakMinutes = newMinutes
-    }
-
-    func setWorkMinutes(_ newMinutes: Int) {
-        if currentMode == .work {
-            if isPlaying { isPlaying = false }
-            workMinutes = newMinutes
-            defaultsStorage.workMinutes = newMinutes
-            resetTimerInterval()
-            return
-        }
-
-        workMinutes = newMinutes
-        defaultsStorage.workMinutes = newMinutes
+        setIsPlaying(true, playHaptic: false)
     }
 }

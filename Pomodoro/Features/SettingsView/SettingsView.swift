@@ -10,7 +10,7 @@ import SwiftUI
 @MainActor
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @Bindable var vm: SessionViewModel
+    let vm: SessionViewModel
 
     var body: some View {
         NavigationStack {
@@ -25,7 +25,7 @@ struct SettingsView: View {
                         breakMinutes: breakMinutesBinding
                     )
                     SettingsSessionTargetSection(
-                        target: $vm.targetedSessionCount
+                        target: targetedSessionCountBinding
                     )
                 }
                 .padding(16)
@@ -65,6 +65,13 @@ struct SettingsView: View {
         Binding<Int>(
             get: { self.vm.workMinutes },
             set: { newValue in self.vm.setWorkMinutes(newValue) }
+        )
+    }
+
+    private var targetedSessionCountBinding: Binding<Int>{
+        Binding<Int>(
+            get: { self.vm.targetedSessionCount },
+            set: { newValue in self.vm.setTargetedSessionCount(newValue) }
         )
     }
 }

@@ -13,11 +13,18 @@ final class SessionViewModelTests: XCTestCase {
     private var suiteName: String!
     private var defaults: UserDefaults!
     private var defaultsStorage: DefaultsStorage!
+    private var hapticEngine: TestHapticEngine!
+    private var alarmPlayer: TestAlarmPlayer!
     private var timer: TestCountdownTimer!
     private var sut: SessionViewModel!
 
     private var newSut: SessionViewModel {
-        .init(defaultsStorage: defaultsStorage, timer: timer)
+        .init(
+            defaultsStorage: defaultsStorage,
+            hapticEngine: hapticEngine,
+            alarmPlayer: alarmPlayer,
+            timer: timer
+        )
     }
 
     private let defaultWorkMinutes = SessionMetrics.defaultWorkMinutes
@@ -38,8 +45,15 @@ final class SessionViewModelTests: XCTestCase {
         self.suiteName = suiteName
         self.defaults = defaults
         self.defaultsStorage = storage
+        self.hapticEngine = .init()
+        self.alarmPlayer = .init()
         self.timer = timer
-        self.sut = .init(defaultsStorage: storage, timer: timer)
+        self.sut = .init(
+            defaultsStorage: storage,
+            hapticEngine: hapticEngine,
+            alarmPlayer: alarmPlayer,
+            timer: timer
+        )
     }
     
     override func tearDown() {
@@ -47,6 +61,8 @@ final class SessionViewModelTests: XCTestCase {
         suiteName = nil
         defaults = nil
         defaultsStorage = nil
+        hapticEngine = nil
+        alarmPlayer = nil
         timer = nil
         sut = nil
         super.tearDown()
@@ -65,10 +81,10 @@ final class SessionViewModelTests: XCTestCase {
     func testIsPlayingStartsAndPausesTimer() {
         XCTAssertFalse(timer.isRunning)
         
-        sut.isPlaying = true
+        sut.setIsPlaying(true)
         XCTAssertTrue(timer.isRunning)
         
-        sut.isPlaying = false
+        sut.setIsPlaying(false)
         XCTAssertFalse(timer.isRunning)
     }
 
@@ -90,7 +106,7 @@ final class SessionViewModelTests: XCTestCase {
     func testSessionModeDoesNotSetOnPlay() {
         XCTAssertEqual(sut.currentMode, .work)
 
-        sut.isPlaying = true
+        sut.setIsPlaying(true)
         sut.setSessionModeAndResetTimer(newMode: .break)
         XCTAssertEqual(sut.currentMode, .work)
         XCTAssertEqual(timer.timeRemaining, defaultWorkInterval)
@@ -139,7 +155,7 @@ final class SessionViewModelTests: XCTestCase {
     }
 
     func testWorkMinutesSetOnWorkModeIsPlayingDoesPauseSetAndReset() {
-        sut.isPlaying = true
+        sut.setIsPlaying(true)
         XCTAssertTrue(sut.isPlaying)
 
         let newMinutes = 35
@@ -156,7 +172,7 @@ final class SessionViewModelTests: XCTestCase {
 
     func testBreakMinutesSetOnBreakModeIsPlayingDoesPauseSetAndReset() {
         sut.setSessionModeAndResetTimer(newMode: .break)
-        sut.isPlaying = true
+        sut.setIsPlaying(true)
         XCTAssertTrue(sut.isPlaying)
 
         let newMinutes = 35
@@ -173,7 +189,7 @@ final class SessionViewModelTests: XCTestCase {
 
     func testWorkMinutesSetOnBreakModeIsPlayingDoesUpdateWorkMinAndStorageOnly() {
         sut.setSessionModeAndResetTimer(newMode: .break)
-        sut.isPlaying = true
+        sut.setIsPlaying(true)
         XCTAssertTrue(sut.isPlaying)
 
         let newMinutes = 15
@@ -189,7 +205,7 @@ final class SessionViewModelTests: XCTestCase {
     }
 
     func testBreakMinutesSetOnWorkModeIsPlayingDoesUpdateBreakMinAndStorageOnly() {
-        sut.isPlaying = true
+        sut.setIsPlaying(true)
         XCTAssertTrue(sut.isPlaying)
 
         let newMinutes = 15
@@ -208,7 +224,7 @@ final class SessionViewModelTests: XCTestCase {
         XCTAssertEqual(sut.targetedSessionCount, 4) // default
         XCTAssertEqual(defaultsStorage.targetedSessionCount, 4)
 
-        sut.targetedSessionCount = 6
+        sut.setTargetedSessionCount(6)
 
         XCTAssertEqual(sut.targetedSessionCount, 6)
         XCTAssertEqual(defaultsStorage.targetedSessionCount, 6)
@@ -247,7 +263,7 @@ final class SessionViewModelTests: XCTestCase {
         sut.setSessionModeAndResetTimer(newMode: .break) // to show reset doesn't touch mode
         timer.set(for: 3) // altered time to show resets
 
-        sut.isPlaying = true
+        sut.setIsPlaying(true)
 
         XCTAssertTrue(sut.isPlaying)
         XCTAssertTrue(timer.isRunning)
@@ -277,7 +293,7 @@ final class SessionViewModelTests: XCTestCase {
         sut.setSessionModeAndResetTimer(newMode: .break) // to show cancel resets to .work
         timer.set(for: 3) // altered time to show resets
 
-        sut.isPlaying = true
+        sut.setIsPlaying(true)
 
         XCTAssertTrue(sut.isPlaying)
         XCTAssertTrue(timer.isRunning)
@@ -314,7 +330,7 @@ final class SessionViewModelTests: XCTestCase {
         XCTAssertFalse(timer.isRunning)
         XCTAssertEqual(timer.timeRemaining, 15*60)
 
-        sut.isPlaying = true
+        sut.setIsPlaying(true)
         XCTAssertTrue(sut.isPlaying)
         XCTAssertTrue(timer.isRunning)
 
@@ -338,7 +354,7 @@ final class SessionViewModelTests: XCTestCase {
         XCTAssertFalse(timer.isRunning)
         XCTAssertEqual(timer.timeRemaining, 10*60)
 
-        sut.isPlaying = true
+        sut.setIsPlaying(true)
         XCTAssertTrue(sut.isPlaying)
         XCTAssertTrue(timer.isRunning)
 
@@ -352,8 +368,8 @@ final class SessionViewModelTests: XCTestCase {
     }
 
     func testSwitchModesDoesNotSwitchOnTargetCountCompletion() {
-        sut.targetedSessionCount = 1
-        sut.isPlaying = true
+        sut.setTargetedSessionCount(1)
+        sut.setIsPlaying(true)
 
         XCTAssertEqual(sut.completedSessions, 0)
         XCTAssertEqual(sut.currentMode, .work)
@@ -368,6 +384,115 @@ final class SessionViewModelTests: XCTestCase {
         XCTAssertEqual(sut.completedSessions, 1)
         XCTAssertEqual(sut.currentMode, .work)
         XCTAssertFalse(sut.isPlaying, "Should not have started new session on target completion")
+    }
+}
+
+// MARK: - Haptics & Alarms
+extension SessionViewModelTests {
+    func testHapticOnSettingsPresentedShouldFireOnBothStates() {
+        XCTAssertTrue(hapticEngine.patternsFired.isEmpty)
+        sut.settingsIsPresented = true
+        sut.settingsIsPresented = false
+        XCTAssertEqual(hapticEngine.patternsFired, [.selection, .selection])
+    }
+
+    func testHapticsOnResetShouldFireReset() {
+        XCTAssertTrue(hapticEngine.patternsFired.isEmpty)
+        sut.didReset()
+        XCTAssertEqual(hapticEngine.patternsFired, [.reset])
+    }
+
+    func testHapticsOnCancelShouldFireCancel() {
+        XCTAssertTrue(hapticEngine.patternsFired.isEmpty)
+        sut.didCancel()
+        XCTAssertEqual(hapticEngine.patternsFired, [.cancel])
+    }
+
+    func testHapticsOnIsPlayingShouldFirePlayOnPlayAndPauseOnPause() {
+        XCTAssertTrue(hapticEngine.patternsFired.isEmpty)
+
+        sut.setIsPlaying(true)
+        sut.setIsPlaying(false)
+
+        XCTAssertEqual(hapticEngine.patternsFired, [.play, .pause])
+    }
+
+    func testHapticsOnSessionModeShouldFireSelectionOnTrueAndNothingOnFalse() {
+        XCTAssertTrue(hapticEngine.patternsFired.isEmpty)
+
+        sut.setSessionModeAndResetTimer(newMode: .work, playHaptic: true)
+        sut.setSessionModeAndResetTimer(newMode: .break, playHaptic: false)
+
+        XCTAssertEqual(hapticEngine.patternsFired, [.selection])
+    }
+
+    func testHapticsOnBreakMinutesShouldIncreaseOnIncreaseAndDecreaseOnDecrease() {
+        let defaultMinutes = SessionMetrics.defaultBreakMinutes
+        let increase = defaultMinutes + 1
+        let decrease = defaultMinutes - 1
+
+        XCTAssertTrue(hapticEngine.patternsFired.isEmpty)
+        XCTAssertEqual(sut.breakMinutes, defaultMinutes)
+
+        sut.setBreakMinutes(increase)
+        sut.setBreakMinutes(decrease)
+
+        XCTAssertEqual(hapticEngine.patternsFired, [.increase, .decrease])
+    }
+
+    func testHapticsOnWorkMinutesShouldIncreaseOnIncreaseAndDecreaseOnDecrease() {
+        let defaultMinutes = SessionMetrics.defaultWorkMinutes
+        let increase = defaultMinutes + 1
+        let decrease = defaultMinutes - 1
+
+        XCTAssertTrue(hapticEngine.patternsFired.isEmpty)
+        XCTAssertEqual(sut.workMinutes, defaultMinutes)
+
+        sut.setWorkMinutes(increase)
+        sut.setWorkMinutes(decrease)
+
+        XCTAssertEqual(hapticEngine.patternsFired, [.increase, .decrease])
+    }
+
+    func testHapticsOnTargetCountShouldIncreaseOnIncreaseAndDecreaseOnDecrease() {
+        let defaultMinutes = SessionMetrics.defaultTargetedSessionCount
+        let increase = defaultMinutes + 1
+        let decrease = defaultMinutes - 1
+
+        XCTAssertTrue(hapticEngine.patternsFired.isEmpty)
+        XCTAssertEqual(sut.targetedSessionCount, defaultMinutes)
+
+        sut.setTargetedSessionCount(increase)
+        sut.setTargetedSessionCount(decrease)
+
+        XCTAssertEqual(hapticEngine.patternsFired, [.increase, .decrease])
+    }
+
+    func testHapticOnSwitchShouldFireModeCompleteOnWorkAndSessionCompleteOnBreak() {
+        XCTAssertTrue(hapticEngine.patternsFired.isEmpty)
+        XCTAssertEqual(sut.currentMode, .work)
+
+        timer.callDidFinish()
+        XCTAssertEqual(sut.currentMode, .break)
+
+        timer.callDidFinish()
+        XCTAssertEqual(sut.currentMode, .work)
+
+        XCTAssertEqual(hapticEngine.patternsFired, [.modeComplete, .sessionComplete])
+    }
+
+    func testAlarmOnSwitchShouldFireModeCompleteOnWorkAndSessionCompleteOnBreak() {
+        XCTAssertTrue(alarmPlayer.alarmsFired.isEmpty)
+        XCTAssertEqual(sut.currentMode, .work)
+
+        timer.callDidFinish()
+        XCTAssertEqual(sut.currentMode, .break)
+
+        timer.callDidFinish()
+        XCTAssertEqual(sut.currentMode, .work)
+
+        XCTAssertEqual(alarmPlayer.alarmsFired, [.modeComplete, .sessionComplete])
+        
     }
 }
 
@@ -398,5 +523,25 @@ private final class TestCountdownTimer: CountdownTiming {
         isRunning = false
         timeRemaining = 0
         didFinish?()
+    }
+}
+
+// MARK: - TestHapticEngine
+@MainActor
+private final class TestHapticEngine: HapticEngineProtocol {
+    var patternsFired = [HapticPattern]()
+
+    func play(_ pattern: HapticPattern) {
+        patternsFired.append(pattern)
+    }
+}
+
+// MARK: - TestAlarmPlayer
+@MainActor
+private final class TestAlarmPlayer: AlarmPlaying {
+    var alarmsFired = [Alarm]()
+
+    func play(_ alarm: Alarm) {
+        alarmsFired.append(alarm)
     }
 }
