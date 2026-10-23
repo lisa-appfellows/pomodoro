@@ -1,23 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "appSubtitle.key" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The Secret Sauce For Focus"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "El secreto del enfoque"
-          }
-        }
-      }
-    },
     "appTitle.key" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -69,53 +52,19 @@
         }
       }
     },
-    "breakSession.key" : {
+    "completedSessionsOverview.key" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Break Session"
+            "value" : "%1$lld of %2$lld sessions"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sesión de descanso"
-          }
-        }
-      }
-    },
-    "cancel.key" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancelar"
-          }
-        }
-      }
-    },
-    "completedToday.key" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Completed Today"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Completados hoy"
+            "value" : "%1$lld de %2$lld sesiones"
           }
         }
       }
@@ -154,23 +103,6 @@
         }
       }
     },
-    "midCompletedSub.key" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Great focus! Keep it up!"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¡Gran enfoque! ¡Sigue así!"
-          }
-        }
-      }
-    },
     "minAbbr.key" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -188,36 +120,36 @@
         }
       }
     },
-    "pause.key" : {
+    "sessionMode.key" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pause"
+            "value" : "Session Mode"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pausa"
+            "value" : "Modo de sesión"
           }
         }
       }
     },
-    "reset.key" : {
+    "sessionModeSub.key" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reset"
+            "value" : "Select your current focus"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reiniciar"
+            "value" : "Selecciona tu enfoque actual"
           }
         }
       }
@@ -239,6 +171,40 @@
         }
       }
     },
+    "sessionTargetCount.key" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Session Target Count"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meta de sesiones"
+          }
+        }
+      }
+    },
+    "sessionTargetCountSub.key" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select your targeted session count"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecciona tu meta de sesiones"
+          }
+        }
+      }
+    },
     "specificMinutes.key" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -252,57 +218,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld min"
-          }
-        }
-      }
-    },
-    "start.key" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Iniciar"
-          }
-        }
-      }
-    },
-    "startingCompletedSub.key" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Get focused."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Concéntrate."
-          }
-        }
-      }
-    },
-    "stop.key" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Detener"
           }
         }
       }
@@ -337,23 +252,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Intervalo de trabajo"
-          }
-        }
-      }
-    },
-    "workSession.key" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Work Session"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sesión de trabajo"
           }
         }
       }
